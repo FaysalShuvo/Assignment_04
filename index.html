@@ -29,7 +29,7 @@
 
     <!--Booking Section-->
     <main class="main-content container">
-      <div class="booking-form">
+      <div id="booking-section" class="booking-form">
         <h3>Booking Flights</h3>
         <div class="input-group">
           <label for="">Flying From</label>
@@ -132,7 +132,7 @@
 
           <div class="amount">
             <div class="left">
-              <p>Charge 10% VAT</p>
+              <p>Charge (10%) VAT</p>
             </div>
             <div class="right">
               <p>$ <span id="vat-amount">0</span></p>
@@ -151,9 +151,14 @@
           </div>
           <!-- total  -->
         </div>
-        <button class="btn-style">Book Now</button>
+        <button id="bookNow" class="btn-style book-now">Book Now</button>
       </div>
-
+     
+      <div id="bonus-section">
+        <h1>welcome aboard!</h1>
+        <h3>Good Luck with travel and feel the adventure!</h3>
+      </div>
+ <!-- bonus section -->
       <div class="booking-content">
         <h1>
           discover <br />
@@ -202,16 +207,25 @@
 
       // vat function
       function vatAmount() {
-        let vat = (document.getElementById("vat-amount").innerText = Math.round(
-          subTotal() * 0.1
-        ));
+        let vat = Math.round(subTotal() * 0.1);
+        document.getElementById("vat-amount").innerText = vat;
         return vat;
       }
+
       // Total price calculation function
       function totalAmount() {
-        document.getElementById("total-amount").innerText =
-          subTotal() + vatAmount();
+        let total = subTotal() + vatAmount();
+        document.getElementById("total-amount").innerText = total;
       }
+
+      // for bonus marks
+      document.getElementById("bookNow").addEventListener("click", function () {
+        const bookingSection = document.getElementById("booking-section");
+        bookingSection.style.display = "none";
+
+        const bonusSection = document.getElementById("bonus-section");
+        bonusSection.style.display = "block";
+      });
     </script>
   </body>
 </html>
