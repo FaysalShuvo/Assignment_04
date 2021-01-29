@@ -37,7 +37,7 @@
             class="inp-style"
             type="text"
             name=""
-            placeholder="Dhake, Bangladesh"
+            placeholder="Dhaka, Bangladesh"
           />
         </div>
         <div class="input-group">
@@ -62,49 +62,94 @@
         <div class="input-group f-class">
           <div>
             <label for="">First Class ($150)</label>
-            <input class="inp-style inp-width" type="number" name="" />
+            <input
+              id="firstClass-ticket"
+              class="inp-style inp-width"
+              value="0"
+              type="number"
+              name=""
+            />
           </div>
           <div class="plus-minus-btn">
-            <p><span>+</span> <span>-</span></p>
+            <p>
+              <button
+                onclick="ticketCountHandler('firstClass', true)"
+                class="button-style"
+              >
+                +
+              </button>
+              <button
+                onclick="ticketCountHandler('firstClass', false)"
+                class="button-style"
+              >
+                -
+              </button>
+            </p>
           </div>
         </div>
+        <!-- first class -->
 
         <div class="input-group f-class">
           <div>
             <label for="">Economy ($100)</label>
-            <input class="inp-style inp-width" type="number" name="" />
+            <input
+              id="economy-ticket"
+              class="inp-style inp-width"
+              value="0"
+              type="number"
+              name=""
+            />
           </div>
           <div class="plus-minus-btn">
-            <p><span>+</span> <span>-</span></p>
+            <p>
+              <button
+                onclick="ticketCountHandler('economy', true)"
+                class="button-style"
+              >
+                +
+              </button>
+              <button
+                onclick="ticketCountHandler('economy', false)"
+                class="button-style"
+              >
+                -
+              </button>
+            </p>
           </div>
         </div>
+        <!-- economy class -->
+
         <div class="calculations">
           <div class="amount">
             <div class="left">
               <p>Subtotal</p>
             </div>
             <div class="right">
-              <p>$500</p>
+              <p>$ <span id="subTotal">0</span></p>
             </div>
           </div>
+          <!-- subtotal -->
 
           <div class="amount">
             <div class="left">
               <p>Charge 10% VAT</p>
             </div>
             <div class="right">
-              <p>$50</p>
+              <p>$ <span id="vat-amount">0</span></p>
             </div>
           </div>
+          <!-- vat -->
+
           <hr />
           <div class="amount">
             <div class="left">
               <h4>Total</h4>
             </div>
             <div class="right">
-              <p>$550</p>
+              <p>$ <span id="total-amount">0</span></p>
             </div>
           </div>
+          <!-- total  -->
         </div>
         <button class="btn-style">Book Now</button>
       </div>
@@ -115,7 +160,7 @@
           around the world
         </h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident
+          Lorem ipsum dolor sit amet consecrator adipisicingelit. Provident
           voluptatibus quam fuga laborumalias veniam libero autem quasi maxime
           ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise
           voluptatibus quam
@@ -123,6 +168,44 @@
       </div>
     </main>
 
-    <!--Thank You-->
+    <!-- script -->
+    <script>
+      // main Function
+      function ticketCountHandler(ticketCategory, isIncreased) {
+        const ticketInput = document.getElementById(ticketCategory + "-ticket")
+          .value;
+        const ticketCount = parseInt(ticketInput);
+        let newTicketCount = ticketCount;
+        if (isIncreased == true) {
+          newTicketCount = ticketCount + 1;
+        }
+        if (isIncreased == false && ticketCount > 0) {
+          newTicketCount = ticketCount - 1;
+        }
+        document.getElementById(
+          ticketCategory + "-ticket"
+        ).value = newTicketCount;
+        subTotal();
+        vatAmount();  
+      }
+      // subtotal Function
+      function subTotal() {
+        let firstClassTicketCount = document.getElementById("firstClass-ticket")
+          .value;
+        let economyTicketCount = document.getElementById("economy-ticket")
+          .value;
+        let subTotal = (document.getElementById("subTotal").innerText =
+          firstClassTicketCount * 150 + economyTicketCount * 100);
+        return subTotal;
+      }
+
+      // vat function
+      function vatAmount() {
+        let vat = (document.getElementById("vat-amount").innerText = Math.round(
+          subTotal() * 0.1
+        ));
+        return tax;
+      }
+    </script>
   </body>
 </html>
