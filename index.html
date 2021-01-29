@@ -186,7 +186,8 @@
           ticketCategory + "-ticket"
         ).value = newTicketCount;
         subTotal();
-        vatAmount();  
+        vatAmount();
+        totalAmount();
       }
       // subtotal Function
       function subTotal() {
@@ -204,7 +205,12 @@
         let vat = (document.getElementById("vat-amount").innerText = Math.round(
           subTotal() * 0.1
         ));
-        return tax;
+        return vat;
+      }
+      // Total price calculation function
+      function totalAmount() {
+        document.getElementById("total-amount").innerText =
+          subTotal() + vatAmount();
       }
     </script>
   </body>
